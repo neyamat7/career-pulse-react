@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import bg1 from "../../assets/bg1.png";
 import bg2 from "../../assets/bg2.png";
 import AppliedItem from "./AppliedItem";
@@ -62,9 +62,19 @@ const AppliedJobs = () => {
 
         {/* cards */}
 
-        {filteredJobs.map((job) => (
-          <AppliedItem job={job} key={job.id}></AppliedItem>
-        ))}
+        {(filteredJobs.length < 1 && (
+          <div className="flex flex-col items-center gap-5">
+            <h1 className="text-center text-2xl">
+              You have not applied any jobs yet.
+            </h1>
+            <Link to={-1}>
+              <button className="btn btn-primary">Go Back</button>
+            </Link>
+          </div>
+        )) ||
+          filteredJobs.map((job) => (
+            <AppliedItem job={job} key={job.id}></AppliedItem>
+          ))}
       </div>
     </div>
   );
